@@ -15,6 +15,8 @@ class UsersController < ProtectedController
   end
 
   # POST '/sign-in'
+  # To make it so you can sign in by your username OR your email, I think
+  # I could add an elsif that mirrors line 22, except with user_name prop
   def signin
     creds = user_creds
     if (user = User.authenticate creds[:email],
@@ -71,7 +73,7 @@ class UsersController < ProtectedController
 
   def user_creds
     params.require(:credentials)
-          .permit(:email, :password, :password_confirmation)
+          .permit(:email, :password, :password_confirmation, :user_name)
   end
 
   def pw_creds
