@@ -1,5 +1,5 @@
 class NpcsController < ProtectedController
-  before_action :set_npc, only: %i[show update destroy]
+  before_action :set_npc, only: %i[update destroy]
 
   # GET /npcs
   def index
@@ -10,12 +10,14 @@ class NpcsController < ProtectedController
 
   # GET /npcs/1
   def show
+    @npc = Npc.find(params[:id])
+
     render json: @npc
   end
 
   # POST /npcs
   def create
-    @npc = Npc.new(npc_params)
+    @npc = current_user.npcs.build(npc_params)
 
     if @npc.save
       render json: @npc, status: :created
@@ -42,7 +44,7 @@ class NpcsController < ProtectedController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_npc
-    @npc = Npc.find(params[:id])
+    @npc = current_user.npcs.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
