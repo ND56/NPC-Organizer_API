@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'pry'
 
 class UsersController < ProtectedController
   before_action :set_user, only: %i[update show]
@@ -21,6 +22,9 @@ class UsersController < ProtectedController
     creds = user_creds
     if (user = User.authenticate creds[:email],
                                  creds[:password])
+      render json: user, serializer: UserLoginSerializer, root: 'user'
+    elsif (user = User.authenticate creds[:user_name],
+                                    creds[:password])
       render json: user, serializer: UserLoginSerializer, root: 'user'
     else
       head :unauthorized
