@@ -6,12 +6,12 @@ curl "http://localhost:4741/npcs" \
     "npc": {
       "name": "'"${NAME}"'",
       "race": "'"${RACE}"'",
-      "class": "'"${CLASS}"'",
       "challenge_rating": "'"${CHALLENGE_RATING}"'",
       "stats": "'"${STATS}"'",
       "traits": "'"${TRAITS}"'",
       "notes": "'"${NOTES}"'",
-      "private": "'"${PRIVATE}"'"
+      "private": "'"${PRIVATE}"'",
+      "dnd_class": "'"${DND_CLASS}"'"
     }
   }'
 

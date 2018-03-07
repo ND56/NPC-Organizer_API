@@ -47,7 +47,7 @@ class NpcsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def npc_params
-    params.require(:npc).permit(:name, :race, :class, :challenge_rating, :stats,
-                                :traits, :notes, :private)
+    params.require(:npc).permit(:name, :race, :challenge_rating, :stats,
+                                :traits, :notes, :private, :dnd_class)
   end
 end
