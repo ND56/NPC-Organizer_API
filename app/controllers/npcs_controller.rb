@@ -47,7 +47,7 @@ class NpcsController < ProtectedController
     @npc = current_user.npcs.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
+  # Only allow a trusted parameter; i.e., "white list" through.
   def npc_params
     params.require(:npc).permit(:name, :race, :challenge_rating, :stats,
                                 :traits, :notes, :private, :dnd_class)
