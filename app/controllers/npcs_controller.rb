@@ -1,4 +1,4 @@
-class NpcsController < ApplicationController
+class NpcsController < ProtectedController
   before_action :set_npc, only: %i[show update destroy]
 
   # GET /npcs
