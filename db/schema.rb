@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180307203458) do
+ActiveRecord::Schema.define(version: 20180308200108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20180307203458) do
     t.string "name"
     t.string "race"
     t.string "challenge_rating"
-    t.string "stats"
     t.string "traits"
     t.string "notes"
     t.datetime "created_at", null: false
@@ -35,6 +34,12 @@ ActiveRecord::Schema.define(version: 20180307203458) do
     t.boolean "private"
     t.string "dnd_class"
     t.bigint "user_id"
+    t.integer "HP"
+    t.integer "AC"
+    t.string "ability_modifiers"
+    t.string "spells_abilities"
+    t.string "items"
+    t.integer "level"
     t.index ["user_id"], name: "index_npcs_on_user_id"
   end
 
