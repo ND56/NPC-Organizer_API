@@ -4,4 +4,5 @@ class User < ApplicationRecord
   include Authentication
   has_many :examples
   has_many :npcs
+  validates :user_name, uniqueness: true
 end
