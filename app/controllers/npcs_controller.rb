@@ -13,6 +13,8 @@ class NpcsController < ProtectedController
     # adding if
     if params[:id] == 'search-by-name'
       search_by_name
+    elsif params[:id] == 'search-by-race'
+      search_by_race
     else
       @npc = Npc.find(params[:id])
 
@@ -48,6 +50,13 @@ class NpcsController < ProtectedController
   def search_by_name
     searched_name = params.require(:npc)['name']
     @npcs = Npc.where(name: searched_name)
+
+    render json: @npcs
+  end
+
+  def search_by_race
+    searched_race = params.require(:npc)['race']
+    @npcs = Npc.where(race: searched_race)
 
     render json: @npcs
   end
