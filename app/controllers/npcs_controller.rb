@@ -92,10 +92,19 @@ class NpcsController < ProtectedController
 
   def search_by_creator
     searched_creator = params.require(:credentials)['user_name']
-    @creator = User.find_by(user_name: searched_creator)
-    @npcs = @creator.npcs
+    if User.find_by(user_name: searched_creator)
+      @creator = User.find_by(user_name: searched_creator)
+      @npcs = @creator.npcs
 
-    render json: @npcs
+      render json: @npcs
+    else
+      render json: @npc.errors, status: :unprocessable_entity
+    end
+    # if @npc.update(npc_params)
+    #   render json: @npc
+    # else
+    #   render json: @npc.errors, status: :unprocessable_entity
+    # end
   end
 
   private
