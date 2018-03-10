@@ -19,6 +19,10 @@ class NpcsController < ProtectedController
       search_by_class
     elsif params[:id] == 'search-by-challenge-rating'
       search_by_challenge_rating
+    elsif params[:id] == 'search-by-level'
+      search_by_level
+    elsif params[:id] == 'search-by-creator'
+      search_by_creator
     else
       @npc = Npc.find(params[:id])
 
@@ -75,6 +79,21 @@ class NpcsController < ProtectedController
   def search_by_challenge_rating
     searched_cr = params.require(:npc)['challenge_rating']
     @npcs = Npc.where(challenge_rating: searched_cr)
+
+    render json: @npcs
+  end
+
+  def search_by_level
+    searched_level = params.require(:npc)['level']
+    @npcs = Npc.where(level: searched_level)
+
+    render json: @npcs
+  end
+
+  def search_by_creator
+    searched_creator = params.require(:credentials)['user_name']
+    @creator = User.find_by(user_name: searched_creator)
+    @npcs = @creator.npcs
 
     render json: @npcs
   end
