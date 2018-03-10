@@ -10,9 +10,14 @@ class NpcsController < ProtectedController
 
   # GET /npcs/1
   def show
-    @npc = Npc.find(params[:id])
+    # adding if
+    if params[:id] == 'search-by-name'
+      search_by_name
+    else
+      @npc = Npc.find(params[:id])
 
-    render json: @npc
+      render json: @npc
+    end
   end
 
   # POST /npcs
@@ -38,6 +43,13 @@ class NpcsController < ProtectedController
   # DELETE /npcs/1
   def destroy
     @npc.destroy
+  end
+
+  def search_by_name
+    searched_name = params.require(:npc)['name']
+    @npcs = Npc.where(name: searched_name)
+
+    render json: @npcs
   end
 
   private

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show update]
 
   # Custom routes
+  get '/npcs/search-by-name' => 'npcs#search_by_name'
   post '/sign-up' => 'users#signup'
   post '/sign-in' => 'users#signin'
   delete '/sign-out' => 'users#signout'
