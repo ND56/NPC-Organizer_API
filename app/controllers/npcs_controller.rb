@@ -15,6 +15,10 @@ class NpcsController < ProtectedController
       search_by_name
     elsif params[:id] == 'search-by-race'
       search_by_race
+    elsif params[:id] == 'search-by-class'
+      search_by_class
+    elsif params[:id] == 'search-by-challenge-rating'
+      search_by_challenge_rating
     else
       @npc = Npc.find(params[:id])
 
@@ -57,6 +61,20 @@ class NpcsController < ProtectedController
   def search_by_race
     searched_race = params.require(:npc)['race']
     @npcs = Npc.where(race: searched_race)
+
+    render json: @npcs
+  end
+
+  def search_by_class
+    searched_class = params.require(:npc)['dnd_class']
+    @npcs = Npc.where(dnd_class: searched_class)
+
+    render json: @npcs
+  end
+
+  def search_by_challenge_rating
+    searched_cr = params.require(:npc)['challenge_rating']
+    @npcs = Npc.where(challenge_rating: searched_cr)
 
     render json: @npcs
   end
