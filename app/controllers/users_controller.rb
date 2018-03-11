@@ -17,6 +17,9 @@ class UsersController < ProtectedController
   # POST '/sign-in'
   # To make it so you can sign in by your username OR your email, I think
   # I could add an elsif that mirrors line 22, except with user_name prop
+  # it's always going to be packaged to show that the first variable is a
+  # credentials[:email] --> I should just make logic that checks that variable
+  # against all existing emails, then all existing usernames
   def signin
     creds = user_creds
     if (user = User.authenticate creds[:email],

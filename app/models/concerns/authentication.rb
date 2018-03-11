@@ -8,7 +8,10 @@ module Authentication
   module ClassMethods
     def authenticate(email, password)
       user = find_by(email: email)
-      return unless user
+      if !user
+        user = find_by(user_name: email)
+      end
+      return unless user # I think this is saying "stop if user doesn't exist"
       user.send :new_token
       user.authenticate password
     end
