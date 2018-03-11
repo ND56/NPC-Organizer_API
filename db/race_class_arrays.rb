@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # A class to contain race/class arrays for search logic
-
 class RaceClassArrays
 
   ARTIFICER = ['Artificer', 'artificer', 'Alchemist', 'alchemist',

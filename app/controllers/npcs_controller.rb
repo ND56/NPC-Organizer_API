@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require '/Users/Kayla/Desktop/Nick Programming Folder/Project #2 - NPC Organizer/API - NPC Organizer/db/race_class_arrays.rb'
-# require 'race_class_arrays'
 
 class NpcsController < ProtectedController
   before_action :set_npc, only: %i[update destroy]
