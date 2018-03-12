@@ -9,7 +9,7 @@ class RaceClassArrays
   BARBARIAN = ['Barbarian', 'barbarian', 'Berserker', 'berserker', 'berserker barbarian', 'Berserker Barbarian', 'Barbarian: Berserker', 'Barbarian (Berserker)',
                'Totem Warrior Barbarian', 'totem warrior barbarian', 'Totem Warrior', 'totem warrior', 'Barbarian: Totem Warrior', 'Barbarian (Totem Warrior)',
                'Ancestral Guardian Barbarian', 'Ancestral Guardian', 'ancestral guardian', 'Barbarian: Ancestral Guardian', 'Barbarian (Ancestral Guardian)',
-               'ancestral guardian barbarian', 'storm herald barbarian', 'Barbarian: Storm Herald','Barbarian (Storm Herald)',
+               'ancestral guardian barbarian', 'storm herald barbarian', 'Barbarian: Storm Herald', 'Barbarian (Storm Herald)',
                'Storm Herald Barbarian', 'Storm Herald', 'storm herald', 'Zealot', 'zealot barbarian', 'Barbarian: Zealot', 'Barbarian (Zealot)',
                'Zealot Barbarian', 'zealot', 'Battlerager', 'battlerager', 'Battlerager Barbarian', 'battlerager barbarian', 'Barbarian: Battle Rager', 'Barbarian (Battle Rager)']
 
@@ -98,7 +98,7 @@ class RaceClassArrays
 
   PALADIN = ['Paladin', 'paladin',
              'Oath of Devotion', 'Paladin (Oath of Devotion)', 'Paladin: Oath of Devotion', 'Paladin of Devotion',
-             'Oath of the Ancients','Paladin: Oath of the Ancients', 'Paladin (Oath of the Ancients)', 'Paladin of the Ancients',
+             'Oath of the Ancients', 'Paladin: Oath of the Ancients', 'Paladin (Oath of the Ancients)', 'Paladin of the Ancients',
              'Oath of Vengeance', 'Paladin of Vengeance', 'Paladin: Oath of Vengeance', 'Paladin (Oath of Vengeance)',
              'Oath of Conquest', 'Paladin of Conquest', 'Paladin: Oath of Conquest', 'Paladin (Oath of Conquest)',
              'Oath of Redemption', 'Paladin of Redemption', 'Paladin (Oath of Redemption)', 'Paladin: Oath of Redemption',
