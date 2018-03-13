@@ -40,7 +40,6 @@ class LikesController < ProtectedController
       current_user.errors.add(:likes, "You've already liked this npc!")
 
       render json: current_user.errors
-      p '***THE NPC IS ALREADY IN THE ARRAY, WHAT THE HELL IS HAPP'
     else
       @like = Like.new(like_params)
 
@@ -69,6 +68,10 @@ class LikesController < ProtectedController
       @like = Like.where('user_id = ? AND npc_id = ?', current_user.id, input_npc_id)
 
       @like.destroy(@like[0].id)
+
+      # also send the associated npc data for use in client
+      @npc_associated_with_deleted_like = Npc.find(input_npc_id)
+      render json: @npc_associated_with_deleted_like
     end
   end
 
