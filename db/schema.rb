@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313025427) do
+ActiveRecord::Schema.define(version: 20180313031629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20180313025427) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_examples_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "npc_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["npc_id"], name: "index_likes_on_npc_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "npcs", force: :cascade do |t|
@@ -40,8 +49,6 @@ ActiveRecord::Schema.define(version: 20180313025427) do
     t.string "spells_abilities"
     t.string "items"
     t.integer "level"
-    t.integer "likes", default: 0
-    t.string "liked_by"
     t.index ["user_id"], name: "index_npcs_on_user_id"
   end
 
@@ -57,5 +64,7 @@ ActiveRecord::Schema.define(version: 20180313025427) do
   end
 
   add_foreign_key "examples", "users"
+  add_foreign_key "likes", "npcs"
+  add_foreign_key "likes", "users"
   add_foreign_key "npcs", "users"
 end
