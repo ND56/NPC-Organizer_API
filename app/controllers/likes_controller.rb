@@ -1,5 +1,7 @@
 class LikesController < ProtectedController
-  before_action :set_like, only: [:show, :update, :destroy]
+  # before_action :set_like, only: [:show, :update, :destroy]
+  before_action :set_like, only: %i[update destroy]
+  # Testing^
 
   # GET /likes
   def index
@@ -10,7 +12,24 @@ class LikesController < ProtectedController
 
   # GET /likes/1
   def show
-    render json: @like
+    # testing everything except last line of method
+    if params[:id] == 'search-by-user'
+      # @user = User.find(params[:user_id])
+      @likes = current_user.liked_npcs
+
+      render json: @likes
+    elsif params[:id] == 'search-by-npc'
+      # @npc = Npc.find(params['npc_id'])
+      input_npc_id = params.require(:like)['npc_id']
+      @npc = Npc.find(input_npc_id)
+      @likes = @npc.liking_users
+
+      render json: @likes
+    else
+      @like = Like.find(params[:id])
+
+      render json: @likes
+    end
   end
 
   # POST /likes
