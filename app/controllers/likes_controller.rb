@@ -1,6 +1,6 @@
 class LikesController < ProtectedController
   # before_action :set_like, only: [:show, :update, :destroy]
-  before_action :set_like, only: %i[update destroy]
+  before_action :set_like, only: %i[update]
   # Testing^
 
   # GET /likes
@@ -54,7 +54,13 @@ class LikesController < ProtectedController
 
   # DELETE /likes/1
   def destroy
-    @like.destroy
+    if params[:id] == 'destroy'
+      input_npc_id = params.require(:like)['npc_id']
+      # @like = Like.where(user_id: current_user.id, npc_id: input_npc_id)
+      @like = Like.where('user_id = ? AND npc_id = ?', current_user.id, input_npc_id)
+
+      @like.destroy(@like[0].id)
+    end
   end
 
   private
