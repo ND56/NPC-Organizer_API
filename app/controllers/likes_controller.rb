@@ -34,12 +34,21 @@ class LikesController < ProtectedController
 
   # POST /likes
   def create
-    @like = Like.new(like_params)
+    input_npc_id = params.require(:like)['npc_id']
+    user_like_arr = current_user.liked_npcs
+    if user_like_arr.any? { |element| element.id == input_npc_id.to_i }
+      current_user.errors.add(:likes, "You've already liked this npc!")
 
-    if @like.save
-      render json: @like, status: :created
+      render json: current_user.errors
+      p '***THE NPC IS ALREADY IN THE ARRAY, WHAT THE HELL IS HAPP'
     else
-      render json: @like.errors, status: :unprocessable_entity
+      @like = Like.new(like_params)
+
+      if @like.save
+        render json: @like, status: :created
+      else
+        render json: @like.errors, status: :unprocessable_entity
+      end
     end
   end
 
