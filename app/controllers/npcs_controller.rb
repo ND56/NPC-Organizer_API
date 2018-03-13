@@ -156,107 +156,133 @@ class NpcsController < ProtectedController
   end
 
   # If any part of the searched race is located in one of the race arrays,
-  # this search returns any NPC with a race that is located in that array
+  # this search returns any NPC with a race that is located in that array,
+  # as well as any npc with that unique class name
   def search_by_race
     searched_race = params.require(:npc)['race']
     searched_race_arr = searched_race.split
     if !(RaceClassArrays::AASIMAR & searched_race_arr).empty?
+      RaceClassArrays::AASIMAR.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::AASIMAR)
 
       render json: @npcs
     elsif !(RaceClassArrays::BUGBEAR & searched_race_arr).empty?
+      RaceClassArrays::BUGBEAR.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::BUGBEAR)
 
       render json: @npcs
     elsif !(RaceClassArrays::DRAGONBORN & searched_race_arr).empty?
+      RaceClassArrays::DRAGONBORN.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::DRAGONBORN)
 
       render json: @npcs
     elsif !(RaceClassArrays::DWARF & searched_race_arr).empty?
+      RaceClassArrays::DWARF.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::DWARF)
 
       render json: @npcs
     elsif !(RaceClassArrays::ELF & searched_race_arr).empty?
+      RaceClassArrays::ELF.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::ELF)
 
       render json: @npcs
     elsif !(RaceClassArrays::FIRBOLG & searched_race_arr).empty?
+      RaceClassArrays::FIRBOLG.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::FIRBOLG)
 
       render json: @npcs
     elsif !(RaceClassArrays::FEY & searched_race_arr).empty?
+      RaceClassArrays::FEY.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::FEY)
 
       render json: @npcs
     elsif !(RaceClassArrays::GENSAI & searched_race_arr).empty?
+      RaceClassArrays::GENSAI.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::GENSAI)
 
       render json: @npcs
     elsif !(RaceClassArrays::GNOME & searched_race_arr).empty?
+      RaceClassArrays::GNOME.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::GNOME)
 
       render json: @npcs
     elsif !(RaceClassArrays::GOBLIN & searched_race_arr).empty?
+      RaceClassArrays::GOBLIN.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::GOBLIN)
 
       render json: @npcs
     elsif !(RaceClassArrays::TROLL & searched_race_arr).empty?
+      RaceClassArrays::TROLL.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::TROLL)
 
       render json: @npcs
     elsif !(RaceClassArrays::GOLIATH & searched_race_arr).empty?
+      RaceClassArrays::GOLIATH.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::GOLIATH)
 
       render json: @npcs
     elsif !(RaceClassArrays::HALFELF & searched_race_arr).empty?
+      RaceClassArrays::HALFELF.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::HALFELF)
 
       render json: @npcs
     elsif !(RaceClassArrays::HALFORC & searched_race_arr).empty?
+      RaceClassArrays::HALFORC.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::HALFORC)
 
       render json: @npcs
     elsif !(RaceClassArrays::HALFLING & searched_race_arr).empty?
+      RaceClassArrays::HALFLING.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::HALFLING)
 
       render json: @npcs
     elsif !(RaceClassArrays::HUMAN & searched_race_arr).empty?
+      RaceClassArrays::HUMAN.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::HUMAN)
 
       render json: @npcs
     elsif !(RaceClassArrays::KENKU & searched_race_arr).empty?
+      RaceClassArrays::KENKU.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::KENKU)
 
       render json: @npcs
     elsif !(RaceClassArrays::KOBOLD & searched_race_arr).empty?
+      RaceClassArrays::KOBOLD.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::KOBOLD)
 
       render json: @npcs
     elsif !(RaceClassArrays::LIZARDFOLK & searched_race_arr).empty?
+      RaceClassArrays::LIZARDFOLK.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::LIZARDFOLK)
 
       render json: @npcs
     elsif !(RaceClassArrays::TABAXI & searched_race_arr).empty?
+      RaceClassArrays::TABAXI.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::TABAXI)
 
       render json: @npcs
     elsif !(RaceClassArrays::TIEFLING & searched_race_arr).empty?
+      RaceClassArrays::TIEFLING.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::TIEFLING)
 
       render json: @npcs
     elsif !(RaceClassArrays::TORTLE & searched_race_arr).empty?
+      RaceClassArrays::TORTLE.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::TORTLE)
 
       render json: @npcs
     elsif !(RaceClassArrays::TRITON & searched_race_arr).empty?
+      RaceClassArrays::TRITON.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::TRITON)
 
       render json: @npcs
     elsif !(RaceClassArrays::YUANTI & searched_race_arr).empty?
+      RaceClassArrays::YUANTI.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::YUANTI)
 
       render json: @npcs
     elsif !(RaceClassArrays::GITH & searched_race_arr).empty?
+      RaceClassArrays::GITH.push(searched_race)
       @npcs = Npc.where(race: RaceClassArrays::GITH)
 
       render json: @npcs
@@ -275,58 +301,72 @@ class NpcsController < ProtectedController
     # checks to see if any matching values in arrays; returns false if there's
     # a matching value; returns true if no matching values.
     if !(RaceClassArrays::ARTIFICER & searched_class_arr).empty?
+      RaceClassArrays::ARTIFICER.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::ARTIFICER)
 
       render json: @npcs
     elsif !(RaceClassArrays::BARBARIAN & searched_class_arr).empty?
+      RaceClassArrays::BARBARIAN.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::BARBARIAN)
 
       render json: @npcs
     elsif !(RaceClassArrays::BARD & searched_class_arr).empty?
+      RaceClassArrays::BARD.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::BARD)
 
       render json: @npcs
     elsif !(RaceClassArrays::CLERIC & searched_class_arr).empty?
+      RaceClassArrays::CLERIC.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::CLERIC)
 
       render json: @npcs
     elsif !(RaceClassArrays::DRUID & searched_class_arr).empty?
+      RaceClassArrays::DRUID.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::DRUID)
 
       render json: @npcs
     elsif !(RaceClassArrays::FIGHTER & searched_class_arr).empty?
+      RaceClassArrays::FIGHTER.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::FIGHTER)
 
       render json: @npcs
     elsif !(RaceClassArrays::MONK & searched_class_arr).empty?
+      RaceClassArrays::MONK.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::MONK)
 
       render json: @npcs
     elsif !(RaceClassArrays::MYSTIC & searched_class_arr).empty?
+      RaceClassArrays::MYSTIC.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::MYSTIC)
 
       render json: @npcs
     elsif !(RaceClassArrays::PALADIN & searched_class_arr).empty?
+      RaceClassArrays::PALADIN.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::PALADIN)
 
       render json: @npcs
     elsif !(RaceClassArrays::RANGER & searched_class_arr).empty?
+      RaceClassArrays::RANGER.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::RANGER)
 
       render json: @npcs
     elsif !(RaceClassArrays::ROGUE & searched_class_arr).empty?
+      RaceClassArrays::ROGUE.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::ROGUE)
 
       render json: @npcs
     elsif !(RaceClassArrays::SORCERER & searched_class_arr).empty?
+      RaceClassArrays::SORCERER.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::SORCERER)
 
       render json: @npcs
     elsif !(RaceClassArrays::WARLOCK & searched_class_arr).empty?
+      RaceClassArrays::WARLOCK.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::WARLOCK )
 
       render json: @npcs
     elsif !(RaceClassArrays::WIZARD & searched_class_arr).empty?
+      RaceClassArrays::WIZARD.push(searched_class)
       @npcs = Npc.where(dnd_class: RaceClassArrays::WIZARD)
 
       render json: @npcs
