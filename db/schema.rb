@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309162806) do
+ActiveRecord::Schema.define(version: 20180313025427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20180309162806) do
     t.string "spells_abilities"
     t.string "items"
     t.integer "level"
+    t.integer "likes", default: 0
+    t.string "liked_by"
     t.index ["user_id"], name: "index_npcs_on_user_id"
   end
 
