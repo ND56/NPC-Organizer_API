@@ -1,352 +1,126 @@
-Rails[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+# npHub: Back-end README.
 
-# rails-api-template
+Front-end Repo: https://github.com/ND56/NPC-Organizer_Client
+Deployed Front-end: https://nd56.github.io/NPC-Organizer_Client/
+Deployed Back-end: https://dashboard.heroku.com/apps/npc-organizer/settings
 
-A template for starting projects with `rails-api`. Includes authentication.
+## Background: Dungeons & Dragons ("D&D")
 
-At the beginning of each cohort, update the versions in [`Gemfile`](Gemfile).
+To understand the utility of npcHub (and it's moniker), one must first have a basic understanding of the classic tabletop game commonly known as D&D.
 
-## Prerequisites
+D&D is a role-playing game ("RPG") in which a group of people come together to play characters---i.e., "player characters," or, "PCs"---in a game created by an individual known as the Dungeon Master ("DM").
 
--   [rails-api-examples-walkthrough](https://git.generalassemb.ly/ga-wdi-boston/rails-api-examples-walkthrough)
+While DMs often have many tools at their disposal to construct the world in which the PCs will play their game, it is an incredibly onerous task. The DM is responsible for creating civilizations, cultures, monsters, pantheons, and--finally--every person that exists in that world aside from the PCs.
 
-## Dependencies
+This last category is commonly referred to as "non-player characters," or "NPCs"---and that's where npcHub comes into play! As I expand on below, my app is designed to alleviate some of the burden that DMs face in creating their worlds, allowing for faster game-building and more D&D-playing.
 
-Install with `bundle install`.
+## Overview of npcHub
 
--   [`rails-api`](https://github.com/rails-api/rails-api)
--   [`rails`](https://github.com/rails/rails)
--   [`active_model_serializers`](https://github.com/rails-api/active_model_serializers)
--   [`ruby`](https://www.ruby-lang.org/en/)
--   [`postgres`](http://www.postgresql.org)
+npcHub is a place for DMs to create, share, and validate other DM's NPCs.
 
-## Installation
+I created a standard one-to-many relationship between users and NPCs to allow for DMs to CRUD NPC resources. This has many uses for DMs; one use is that it allows DMs to store their NPCs somewhere and they can come back to them and reuse them in future D&D adventures (i.e., DMs can keep them organized).
 
-### Download Template:
-1.  [Download](../../archive/master.zip) this template.
-1.  Unzip and rename the template directory (`unzip ~/Downloads/rails-api-template-master.zip`)
-1.  Move into the new project and `git init`.
+Another big part of why this app is useful is its search functionality and its ability for DMs to not only manage their own NPCs, but to share NPCs with eachother. The current iteration of the app allows DMs to view all public NPCs (the app has an option to set NPCs to private), as well as to search through NPCs based on a number of criteria (including NPC name, class, race, level, challenge rating, and NPC creator).
 
-### Customize Template:
-1.  Empty [`README.md`](README.md) and fill with your own content.
-1.  Rename your app module in `config/application.rb` (change
-    `RailsApiTemplate`).
-1.  Rename your project database in `config/database.yml` (change
-    `'rails-api-template'`).
+In this current iteration, the search functionality operates mostly based on exact equivalence between the search parameters and the NPC attribute; however, two exceptions are searches by race and searches by class---which are somewhat more robust. Both of these searches make use of stored arrays of classes, subclasses, races, and subraces and will return all NPCs falling within one of those arrays if the user's search parameter also falls within one of the arrays. In other words, a search for "Elf" will return all variations of Elves (e.g., Drow, Eladrin, etc.) and a search for "Wizard" will return all variations of Wizard (e.g., Illusionist, Necromancer, etc.).
 
-### Setup Environment:
-1.  Install dependencies with `bundle install`.
-1.  `git add` and `git commit` your changes.
-1.  Create a `.env` for sensitive settings (`touch .env`).
-1.  Generate new `development` and `test` secrets (`bundle exec rails secret`).
-1.  Store them in `.env` with keys `SECRET_KEY_BASE_<DEVELOPMENT|TEST>`
-    respectively.
-1.  In order to make requests to your deployed API, you will need to set
-    `SECRET_KEY_BASE` in the environment of the production API (for example, using `heroku config:set` or the Heroku dashboard).
-1.  In order to make requests from your deployed client application, you will
-    need to set `CLIENT_ORIGIN` in the environment of the production API (for example, `heroku config:set CLIENT_ORIGIN=https://<github-username>.github.io`).
-    See more about deploying to heroku [rails-heroku-setup-guide](https://git.generalassemb.ly/ga-wdi-boston/rails-heroku-setup-guide)
+In the final stages of this iteration, I implemented a "like" functionality. The idea dawned on me after I asked some friends to make a few NPCs to get my database started and I subsequently found myself repeatedly checking back to see what they updated. I realized that the hope of a "reward" kept me coming back to my deployed app and it struck me that this was much like social media, which---whether we want to admit it or not---many of us use because of the lottery-like rewards that come in the form of "likes" and "follows."
 
-### Setup your database:
-    - bin/rails db:drop (if it already exists)
-    - bin/rails db:create
-    - bin/rails db:migrate
-    - bin/rails db:seed
-    - bin/rails db:examples
-
-  Note: Remember to follow the same commands when setting up your deployed database!
-
-### Run your server!
-1. Run the API server with `bin/rails server` or `bundle exec rails server`.
+Realizing that this could draw more users to my app, I decided to implement a many-to-many relationship between users and npcs through a new resource aptly named "likes." In this current iteration, when viewing other DM's NPCs (DMs cannot "like" their own NPCs), DMs can "like" those NPCs (DMs can only "like" an NPC once) and the UI provides a readout of how many times each NPC has been liked. In addition, every user's home page has a display of the two NPCs that have garnered the most likes. In addition to being a tool that can draw more DMs to my app, I think this also serves the dual purpose of allowing DMs to validate eachother's NPCs and to draw the best of the group to the attention of other users---making my app that much more effective in its purpose. After all, better NPCs will yield better D&D gameplay.
 
-## Structure
+## Technologies Used
 
-This template follows the standard project structure in Rails.
+Front-end: (1) HTML (including Handlebars), (2) CSS, (3) Bootstrap, and (4) JavaScript (including jQuery for DOM manipulation and jQuery/AJAX for API interactions).
 
-`curl` command scripts are stored in [`scripts`](scripts) with names that
-correspond to API actions.
+Back-end: (1) PostgreSQL and (2) Ruby on Rails.
 
-User authentication is built-in.
-
-## Tasks
-
-Developers should run these often!
-
--   `bin/rails routes` lists the endpoints available in your API.
--   `bin/rails test` runs automated tests.
--   `bin/rails console` opens a REPL that pre-loads the API.
--   `bin/rails db` opens your database client and loads the correct database.
--   `bin/rails server` starts the API.
--   `scripts/*.sh` run various `curl` commands to test the API. See below.
+## Improvements Anticipated in Future Iterations
 
-<!-- TODO -   `rake nag` checks your code style. -->
-<!-- TODO -   `rake lint` checks your code for syntax errors. -->
-
-## API
-
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
-
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API. As an alternative, you can write automated
-tests in RSpec to test your API.
-
-### Authentication
-
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password`     | `users#changepw`  |
-| DELETE | `/sign-out`        | `users#signout`   |
-
-#### POST /sign-up
-
-Request:
-
-```sh
-curl http://localhost:4741/sign-up \
-  --include \
-  --request POST \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'",
-      "password_confirmation": "'"${PASSWORD}"'"
-    }
-  }'
-```
-
-```sh
-EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-up.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "ava@bob.com"
-  }
-}
-```
-
-#### POST /sign-in
-
-Request:
-
-```sh
-curl http://localhost:4741/sign-in \
-  --include \
-  --request POST \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'"
-    }
-  }'
-```
-
-```sh
-EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-in.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "ava@bob.com",
-    "token": "BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f"
-  }
-}
-```
-
-#### PATCH /change-password
-
-Request:
-
-```sh
-curl --include --request PATCH "http://localhost:4741/change-password" \
-  --header "Authorization: Token token=$TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "'"${OLDPW}"'",
-      "new": "'"${NEWPW}"'"
-    }
-  }'
-```
-
-```sh
-OLDPW='hannah' NEWPW='elle' TOKEN='BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f' sh scripts/change-password.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out
-
-Request:
-
-```sh
-curl http://localhost:4741/sign-out \
-  --include \
-  --request DELETE \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-TOKEN='BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f' sh scripts/sign-out.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-### Users
-
-| Verb | URI Pattern | Controller#Action |
-|------|-------------|-------------------|
-| GET  | `/users`    | `users#index`     |
-| GET  | `/users/1`  | `users#show`      |
-| PATCH| `/users/1`  | `users#update`    |
-
-#### GET /users
-
-Request:
-
-```sh
-curl http://localhost:4741/users \
-  --include \
-  --request GET \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/users.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "users": [
-    {
-      "id": 2,
-      "email": "bob@ava.com"
-    },
-    {
-      "id": 1,
-      "email": "ava@bob.com"
-    }
-  ]
-}
-```
-
-#### GET /users/:id
-
-Request:
-
-```sh
-curl --include --request GET http://localhost:4741/users/$ID \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-ID=2 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/user.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 2,
-    "email": "bob@ava.com"
-  }
-}
-```
-
-#### PATCH /users/:id
-
-Request:
-
-```sh
-curl "http://localhost:4741/users/${ID}" \
-  --include \
-  --request PATCH \
-  --header "Authorization: Token token=${TOKEN}" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "user": {
-      "email": "'"${EMAIL}"'"
-    }
-  }'
-```
-
-```sh
-ID=1 TOKEN="BAhJIiU1NGNlYjRmMjBhM2NkZTZiNzk1MGNiYmZiYWMyY2U4MwY6BkVG--ddb1e16af0e05921aa56d771e4a2f816f2a1d46e"
-EMAIL=mike@m
-sh scripts/users/user-update.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{"user":{"id":1,"email":"mike@m"}}
-```
-
-### Reset Database without dropping
-
-This is not a task developers should run often, but it is sometimes necessary.
-
-**locally**
-
-```sh
-bin/rails db:migrate VERSION=0
-bin/rails db:migrate db:seed db:examples
-```
-
-**heroku**
-
-```sh
-heroku run rails db:migrate VERSION=0
-heroku run rails db:migrate db:seed db:examples
-```
-
-## Additional Resources
-- [rails-heroku-setup-guide](https://git.generalassemb.ly/ga-wdi-boston/rails-heroku-setup-guide)
-- http://guides.rubyonrails.org/api_app.html
-- https://blog.codeship.com/building-a-json-api-with-rails-5/
-
-## [License](LICENSE)
-
-1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+There were many goals that I didn't get to accomplish in this current iteration. Some future features I hope to implement include the following:
+
+(1) A dynamic UI: I didn't have time to test the UI at different resolutions, so the app is only currently ideal on a standard computer screen. Relatedly, I'd like to improve overall UI design and styling.
+
+(2) I want to create another resource of "folders" (a one-to-many relationship with users) that will allow DMs to store NPCs in specific folders that they can name, e.g., based on which adventures the NPCs are in.
+
+(3) I want to build a tool that will automatically generate NPCs for DMs by relying on an existing third party 5th edition D&D API.
+
+(4) While my app has both front- and back-end validations, the requirement that users provide a username currently relies solely on a front-end validation. I hope to change that  in the future.
+
+(5) I would like to make the search functionality even more robust than it currently is. For example, I'd like the search-by-name feature to not rely solely on equivalence. Also, I'd like to implement the ability to search by multiple NPC attributes at the same time.
+
+(6) I would like DMs to be able to export NPCs to a pdf.
+
+(7) I want to make much more use of the many-to-many relationship I implemented with "likes." I simply ran out of time, but I'd like to at the very least make it so users can see how many "likes" they've garnered and can also specifically see which of their NPCs have received likes.
+
+(8) I want to have the delete NPC button double-check with the user before the resource is deleted.
+
+(9) I want to make it so users can make iterative searches instead of having to return to their profile page before making another search. However, a lot happens behind the scenes when a user returns to their profile page, so I'll need to make sure any "new search" button also handles those tasks.
+
+(10) My code is in dire need of refactoring. I drafted this first iteration in a span of 6 days, and much of it was therefore---by necessity---rushed. Much of my code could and should be refactored to be more efficient.
+
+## Original Entity Relationship Diagram (ERD) (Created during early planning stages)
+
+https://imgur.com/a/Z47aZ
+
+## Planned Schedule For First Iteration (Established during early planning stages)
+
+Monday (3/5/18)
+
+  Planning
+     Review full-stack-project-practice
+     Review full-stack-project-modeling-lab
+     Create User Stories
+     Create Wire Frames
+     Create ERD
+
+Tuesday (3/6/18)
+
+  Set Up: API
+     Download Rails API Template
+     Create a Github Repository
+     Deploy to Heroku
+
+Tuesday (3/6/18)
+
+  Set Up: Client
+     Download Browser Template
+     Create a Github Repository
+     Deploy to Github Pages
+
+Wednesday & Thursday (3/7/18-3/8/18)
+
+  API
+     Review rails-api-one-to-many or rails-api-many-to-many
+     Scaffold your resource
+     Test your resource's end points with curl scripts
+     Update resource controller to inherit from Protected or OpenRead controller
+     Test your resource's end points with curl scripts
+     Add the relationship to a User
+     Add User ownership to resource controller
+
+Friday & Saturday (3/9/18-3/10/18)
+
+  Client
+     Review api-token-auth
+     Sign Up (curl then web app)
+     Sign In (curl then web app)
+     Change Password (curl then web app)
+     Sign Out (curl then web page)
+     All API calls have success or failure messages
+     Review query-ajax-post
+     Create resource (curl then web app)
+     Get all of their owned resources (curl then web app)
+     Delete single resource (curl then web app)
+     Update single resource (curl then web app)
+
+Sunday (3/11/18)
+
+  Bonnus Features & Project Wrap-Up
+
+Monday (3/12/18)
+
+  Bonnus Features & Project Wrap-Up
+
+Tuesday (3/13/18)
+
+  Bonnus Features & Project Wrap-Up
