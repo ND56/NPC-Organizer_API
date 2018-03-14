@@ -257,9 +257,9 @@ class RaceClassArrays
   GOLIATH = ['Goliath', 'goliath']
 
   HALFELF = ['Half-Elf', 'half-elf', 'Half-Elven', 'half-elven', 'Half-Eflin',
-             'half-elfin']
+             'half-elfin', 'Half Elf', 'half elf']
 
-  HALFORC = ['Half-Orc', 'half-orc', 'Orc', 'orc']
+  HALFORC = ['Half-Orc', 'half-orc', 'Orc', 'orc', 'half orc', 'Half Orc']
 
   HALFLING = ['Halfling', 'halfling', 'Hobbit', 'hobbit', 'Ghostwise',
               'ghostwise', 'Lightfoot', 'lightfoot', 'Stout', 'stout',
