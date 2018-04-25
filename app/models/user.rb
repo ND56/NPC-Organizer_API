@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :examples
   has_many :npcs
   has_many :likes
+  has_many :folders
   has_many :liked_npcs, through: :likes,
                         source: :npc
 
