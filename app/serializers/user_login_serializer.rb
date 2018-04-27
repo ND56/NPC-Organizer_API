@@ -2,6 +2,7 @@
 
 class UserLoginSerializer < ActiveModel::Serializer
   attributes :id, :email, :token, :user_name
+  has_many :folders
 
   def token
     Rails.application.message_verifier(:signed_token).generate(object.token)

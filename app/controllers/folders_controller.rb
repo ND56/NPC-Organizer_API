@@ -3,7 +3,9 @@ class FoldersController < ProtectedController
 
   # GET /folders
   def index
-    @folders = Folder.all
+    # @folders = Folder.all
+    # changed so an index returns a user's folders/npcs
+    @folders = current_user.folders
 
     render json: @folders
   end

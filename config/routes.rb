@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :npcs, except: %i[new edit]
   resources :folders, except: %i[new edit]
   resources :likes, except: %i[new edit]
+  resources :saves, except: %i[new edit]
   # gives:
   # get '/npcs' => 'npcs#index'
   # get '/npcs/:id' => 'npcs#show'
