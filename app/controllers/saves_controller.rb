@@ -1,5 +1,5 @@
 class SavesController < ApplicationController
-  before_action :set_safe, only: [:show, :update, :destroy]
+  before_action :set_safe, only: [:show, :update]
 
   # GET /saves
   def index
@@ -37,7 +37,14 @@ class SavesController < ApplicationController
 
   # DELETE /saves/1
   def destroy
-    @safe.destroy
+    input_npc_id = params.require(:safe)['npc_id']
+    input_folder_id = params.require(:safe)['folder_id']
+    @safe = Safe.where('folder_id = ? AND npc_id = ?', input_folder_id, input_npc_id)
+
+    @safe.destroy(@safe[0].id)
+    # also send the associated folder data for use in client
+    @folder_associated_with_deleted_save = Folder.find(input_folder_id)
+    render json: @folder_associated_with_deleted_save
   end
 
   private
